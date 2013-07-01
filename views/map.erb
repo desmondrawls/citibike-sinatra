@@ -1,4 +1,8 @@
 <h1>MAP!</h1>
+<ul>
+  <li><%= @start_lat%>, <%= @start_lng%></li>
+  <li><%= @end_lat%>, <%= @start_lng%></li>
+</ul>
 <div id="map"></div>
 <script type="text/javascript" charset="utf-8">
   var map = L.map('map').setView([40.7142, -74.0064], 13);
@@ -6,4 +10,14 @@
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
     maxZoom: 18
   }).addTo(map);
+  var longitude1 = <%= @start_lng.to_f%>;
+  var latitude1 = <%= @start_lat.to_f%>;
+  L.marker([latitude1, longitude1]).addTo(map);
+  var longitude2 = <%= @end_lng.to_f%>;
+  var latitude2 = <%= @end_lat.to_f%>;
+  L.marker([latitude2, longitude2]).addTo(map);
+  L.polygon([
+    [latitude1, longitude1],
+    [latitude2, longitude2]
+  ]).addTo(map);
 </script>
